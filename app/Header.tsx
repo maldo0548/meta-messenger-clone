@@ -1,4 +1,5 @@
 import { getServerSession } from "next-auth";
+import { authOptions } from "../pages/api/auth/[...nextauth]";
 import Image from "next/image";
 
 import Link from "next/link";
@@ -6,7 +7,7 @@ import React from "react";
 import LogoutButton from "./LogoutButton";
 
 async function Header() {
-    const session = await getServerSession();
+    const session = await getServerSession(authOptions);
     if (session)
         return (
             <header className="sticky top-0 z-50 bg-white flex justify-between items-center shadow-sm p-10">
