@@ -1,9 +1,11 @@
 "use client";
-import { getProviders } from "next-auth/react";
+import { BuiltInProviderType } from "next-auth/providers";
+import { ClientSafeProvider, getProviders, LiteralUnion } from "next-auth/react";
 import { signIn } from "next-auth/react";
 type Props = {
-    providers: Awaited<ReturnType<typeof getProviders>>;
+    providers: Record<LiteralUnion<BuiltInProviderType, string>, ClientSafeProvider> | null;
 };
+
 function SignInComponent({ providers }: Props) {
     return (
         <div className="flex justify-center">
