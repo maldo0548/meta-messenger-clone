@@ -13,7 +13,6 @@ async function SignInPage() {
                     alt="Meta Logo"
                 />
             </div>
-            {/* @ts-expect-error Server Component */}
             <SignInComponent />
         </div>
     );
