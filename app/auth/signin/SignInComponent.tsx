@@ -2,11 +2,23 @@
 import { BuiltInProviderType } from "next-auth/providers";
 import { ClientSafeProvider, getProviders, LiteralUnion } from "next-auth/react";
 import { signIn } from "next-auth/react";
-type Props = {
-    providers: Record<LiteralUnion<BuiltInProviderType, string>, ClientSafeProvider> | null;
-};
+import { useEffect, useState } from "react";
 
-function SignInComponent({ providers }: Props) {
+function SignInComponent() {
+    let [providers, setProviders] = useState<Record<
+        LiteralUnion<BuiltInProviderType, string>,
+        ClientSafeProvider
+    > | null>(null);
+    useEffect(() => {
+        async function gatherProviders() {
+            setProviders(await getProviders());
+        }
+        gatherProviders();
+    }, []);
+    if (!providers) {
+        return;
+    }
+
     return (
         <div className="flex justify-center">
             {Object.values(providers!).map((provider) => {

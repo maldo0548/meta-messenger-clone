@@ -1,10 +1,7 @@
-import { getProviders } from "next-auth/react";
 import Image from "next/image";
 import SignInComponent from "./SignInComponent";
 
 async function SignInPage() {
-    const providers = await getProviders();
-
     return (
         <div>
             <div className="grid justify-center">
@@ -16,7 +13,8 @@ async function SignInPage() {
                     alt="Meta Logo"
                 />
             </div>
-            <SignInComponent providers={providers} />
+            {/* @ts-expect-error Server Component */}
+            <SignInComponent />
         </div>
     );
 }
